@@ -1,0 +1,26 @@
+#!/bin/bash
+
+users=$(cut -d: -f1 /etc/passwd | grep -v "^$")
+
+for user in $users
+
+do
+	dir=/home/"$user"
+	if [ -d  "$dir" ]; then
+
+		jpg=$(sudo find "$dir" -name '*.jpg' | wc -l)
+		
+		mp3=$(sudo find "$dir" -name '*.mp3' | wc -l)
+
+		mp4=$(sudo find "$dir" -name '*.jpg' | wc -l)
+
+		echo "Usuário: $user"
+
+		echo "Arquivos JPG: $jpg"
+
+		echo "Arquivos MP3: $mp3"
+
+		echo "Arquivos MP4: $mp4"
+		echo ""
+	fi
+done

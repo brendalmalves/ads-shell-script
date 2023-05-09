@@ -1,0 +1,42 @@
+#!/bin/bash
+
+user=$(id -un)
+filesToBackup=/home/"$user"
+backupDir=$filesToBackup/Backup
+
+function backupDir() {
+
+	if [ ! -d "$backupDir" ]; then
+		mkdir -p "$backupDir"
+		echo "O diretório "$backupDir" foi criado."
+	else
+		echo "O diretório "$backupDir" já existe."
+	fi
+}
+
+function createFileName() {
+
+	day=$(date +'%Y%m%d')
+	fileName=backup_"$day".tgz
+	echo $fileName
+
+}
+
+echo "=================================================================================="
+
+echo "Fazendo backup dos arquivos do usuário: "$user""
+
+echo $(backupDir)
+
+echo "Salvando os arquivos do diretório "$filesToBackup", no diretório "$backupDir""
+
+tar czf "$backupDir"/$(createFileName) $filesToBackup
+
+echo "Backup finalizado. Favor verificar o arquivo $(createFileName)"
+
+echo "=================================================================================="
+
+
+
+
+

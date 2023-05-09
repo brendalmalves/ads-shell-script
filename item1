@@ -1,0 +1,26 @@
+#!/bin/bash
+
+echo "========================================================="
+
+echo "Relatório da máquina: $(hostname)"
+
+echo "Data/Hora: $(date)"
+
+echo "========================================================="
+
+echo "" 
+
+echo "Máquina ativa desde: $(uptime -s)"
+
+echo ""
+
+echo "Versão do Kernel: $(uname -r)"
+
+echo ""
+
+echo "Memória total: $(free -h | awk '/^Mem/ {print $2}' )"
+
+echo ""
+
+echo "Partições:"
+df -h | awk '{print $1,$2,$3,$4,$5,$6}'

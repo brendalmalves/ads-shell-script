@@ -1,0 +1,48 @@
+#!/bin/bash
+
+function maior() {
+	value1=$1
+	value2=$2
+	if [[ $value1 -gt $value2 ]]; then
+		echo $value1
+	else
+		echo $value2
+	fi
+}
+
+function menor() {
+        value1=$1
+        value2=$2
+        if [[ $value1 -lt $value2 ]]; then
+                echo $value1
+        else
+                echo $value2
+        fi
+}
+
+
+function readFile() {
+	operator=$1
+	filename=$2
+	value=$(head -n 1 $filename)
+	while read line;
+	do
+	case $operator in
+		"MAIOR")
+			value=$(maior $line $value)
+		;;
+
+		"MENOR")
+			value=$(menor $line $value)
+		;;
+
+		*) 
+			echo "operador inválido"
+		;;
+	esac
+	done < $filename
+	echo $value
+}
+
+echo $(readFile $1 $2)
+

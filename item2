@@ -1,0 +1,26 @@
+#!/bin/bash
+
+user=$1
+dir=$(grep "^$user" /etc/passwd | cut -d: -f6)
+
+echo "==============================================================="
+
+echo "Relatório do Usuário: $user"
+
+echo ""
+
+echo "UID: $(id -u $user)" 
+
+echo "Nome ou Descrição: $(grep "^$user" /etc/passwd | cut -d: -f5)"
+
+echo ""
+
+echo "Total Usado no $dir: $(sudo du -sh "$dir" | cut -f1)"
+
+echo ""
+
+echo "Último login: "
+
+last -1 "$user"
+
+echo "==============================================================="
